@@ -1,0 +1,4 @@
+curl --location 'http://localhost:5000/customer/login?username=user2&password=password2' \
+--header 'Content-Type: application/json' \
+--data '{"username":"user2", "password":"password2"}'
+User successfully logged in
