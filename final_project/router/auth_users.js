@@ -23,11 +23,6 @@ const isValid = (username) => {
     }
 }
 
-// const authenticatedUser = (username, password) => { //returns boolean    Task 7 , based on task 6 
-//     //write code to check if username and password match the one we have in records.
-
-// } 
-
 // write code to check if username and password match the one we have in records. Task 7 , based on task 6 
 const authenticatedUser = (username, password) => {
     // Filter the users array for any user with the same username and password
@@ -61,7 +56,8 @@ regd_users.post("/login", (req, res) => {
 
         // Store access token and username in session
         req.session.authorization = {
-            accessToken, username   ////It must also save the user credentials for the session as a JWT. Use the endpoint as "customer/login"
+            accessToken, 
+            username   ////It must also save the user credentials for the session as a JWT. Use the endpoint as "customer/login"
         }
         return res.status(200).send("User successfully logged in");
     } else {
@@ -69,10 +65,31 @@ regd_users.post("/login", (req, res) => {
     }
 });
 
-// Add a book review  Task 8 
+// adding or modifying a book review  Task 8 //////////////////////////////////// git add push
 regd_users.put("/auth/review/:isbn", (req, res) => {
-    //Write your code here
-    return res.status(300).json({ message: "Yet to be implemented" });
+    const isbn = req.params.isbn;
+    const newReview = req.body.review;
+    let username = req.session.authorization["username"];
+    //Get the book
+    let book = books[isbn];
+    //Validate the book
+    if (!book) {
+        return res.status(404).json({ message: "Book not found" });
+    }
+    //Check existing review
+    let review = book.reviews[username]
+    
+    if (review) {
+        //Update
+        book.reviews[username] = newReview;
+        return res.status(200).json({message: "Review Updated!"});
+    }
+    else {
+        //Add
+        book.reviews[username] = newReview;
+        return res.status(200).json({message: "Review added!"});
+    }
+
 });
 
 module.exports.authenticated = regd_users;

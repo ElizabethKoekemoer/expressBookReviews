@@ -5,7 +5,7 @@ let users = require("./auth_users.js").users;
 const public_users = express.Router();
 
 
-public_users.post("/register", (req,res) => {   //Task 6 toets???
+public_users.post("/register", (req,res) => {   //Task 6 
 const username = req.body.username;
     const password = req.body.password;
 
