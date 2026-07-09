@@ -122,7 +122,7 @@ const getAuthor = (author) => {
     });
 }
 
-getAuthor(Samuel);
+//getAuthor(Samuel);
 
 // Get all books based on title  Task 4 Work's
 public_users.get('/title/:title',function (req, res) {
@@ -137,6 +137,31 @@ public_users.get('/title/:title',function (req, res) {
 
   return res.status(404).json({message: "Title not found"});
 });
+
+//Task 13
+const getTitle = (title) => {     
+  let url = 'http://localhost:5000/title/' + title;
+  // Sending a GET request to the specified URL using axios
+  const req = axios.get(url)
+  // Logging the initial promise object
+  console.log(req);
+  // Handling the promise resolution
+  req.then(resp => {
+    // Logging the Book details according to the title
+    console.log("Book details for title");
+    // Logging the response data
+    console.log(resp.data);
+  })
+    // Handling the promise rejection
+    .catch(err => {
+      // Logging the rejection message with the URL
+      console.log("Rejected for url " + url);
+      // Logging the error message
+      console.log(err.toString());
+    });
+}
+
+getTitle(Things Fall Apart);
 
 //  Get book review Task 5 work's 
 public_users.get('/review/:isbn', function (req, res) {
