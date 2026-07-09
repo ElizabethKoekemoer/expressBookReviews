@@ -3,6 +3,7 @@ let books = require("./booksdb.js");
 let isValid = require("./auth_users.js").isValid;
 let users = require("./auth_users.js").users;
 const public_users = express.Router();
+const axios = require('axios').default;
 
 
 public_users.post("/register", (req,res) => {   //Task 6 
@@ -26,10 +27,30 @@ const username = req.body.username;
 
 // Get the book list available in the shop Task 1 Work's
 public_users.get('/',function (req, res) {
-  //Write your code here
-  return res.send(JSON.stringify(books, null, 4));
+    return res.send(JSON.stringify(books, null, 4));
 });
 
+const getBooks = () => {
+  let url = 'http://localhost:5000/';
+  // Sending a GET request to the specified URL using axios
+  const req = axios.get(url)
+  // Logging the initial promise object
+  console.log(req);
+  // Handling the promise resolution
+  req.then(resp => {
+    // Logging the Book list
+    console.log("Book list received");
+    // Logging the response data
+    console.log(resp.data);
+  })
+    // Handling the promise rejection
+    .catch(err => {
+      // Logging the rejection message with the URL
+      console.log("Rejected for url " + url);
+      // Logging the error message
+      console.log(err.toString());
+    });
+}
 
 // Get book details based on ISBN  Task 2  Work's
 public_users.get('/isbn/:isbn',function (req, res) {
