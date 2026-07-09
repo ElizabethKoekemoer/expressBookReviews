@@ -83,7 +83,7 @@ const getISBN = (isbn) => {
     });
 }
 
-getISBN(3);
+//getISBN(3);
   
 // Get book details based on author Task 3 works's
 public_users.get('/author/:author', function (req, res) {
@@ -98,6 +98,31 @@ public_users.get('/author/:author', function (req, res) {
 
   return res.status(404).json({message: "Book not found"});
 });
+
+//Task 12 
+const getAuthor = (author) => {     
+  let url = 'http://localhost:5000/author/' + author;
+  // Sending a GET request to the specified URL using axios
+  const req = axios.get(url)
+  // Logging the initial promise object
+  console.log(req);
+  // Handling the promise resolution
+  req.then(resp => {
+    // Logging the Book details for author
+    console.log("Book details for author");
+    // Logging the response data
+    console.log(resp.data);
+  })
+    // Handling the promise rejection
+    .catch(err => {
+      // Logging the rejection message with the URL
+      console.log("Rejected for url " + url);
+      // Logging the error message
+      console.log(err.toString());
+    });
+}
+
+getAuthor(Samuel);
 
 // Get all books based on title  Task 4 Work's
 public_users.get('/title/:title',function (req, res) {
