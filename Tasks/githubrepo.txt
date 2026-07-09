@@ -1,0 +1,1 @@
+curl -s https://api.github.com/repos/<ElizabethKoekemoer>/expressBookReviews | jq '.parent.full_name'
