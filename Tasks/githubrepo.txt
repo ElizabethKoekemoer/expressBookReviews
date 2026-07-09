@@ -1,1 +1,1 @@
-curl -s https://api.github.com/repos/<ElizabethKoekemoer>/expressBookReviews | jq '.parent.full_name'
+curl git@github.com:ElizabethKoekemoer/expressBookReviews.git 
