@@ -1,0 +1,8 @@
+curl --location --request DELETE 'http://localhost:5000/customer/auth/review/1' \
+--header 'Content-Type: application/json' \
+--data '{
+    "review":"Shit book3"
+}'
+{
+    "message": "Review deleted!"
+}
